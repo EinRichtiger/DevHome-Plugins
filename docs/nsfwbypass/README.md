@@ -7,7 +7,7 @@ __ __
 __ __
 This is daily checked by me (Win8.1VMUser) to ensure it works. And yes it works!
 Stay safe and for plugin ideas dm me on dc (same username as I typed above!).
-### WARNING: This plugin has been OPTIMIZED for Vencore! Using it on any versions below 290 may cause BUGS or make it NOT WORKING! That's why we've flagged this plugin as warning in our repo. Please use 290+ as stated [HERE](https://github.com/ApexTeamPL/Vencore/blob/main/docs/vencore-mobile/)
+### WARNING: This plugin has been OPTIMIZED for Voxi and Kettu! Using it on any versions below 290 may cause BUGS or make it NOT WORKING! That's why we've flagged this plugin as warning in our repo. Please use 290+ as stated [HERE](https://github.com/ApexTeamPL/Vencore/blob/main/docs/vencore-mobile/)
 ### NOT ANYONE... We've checked it on Revenge 292014, 287013 and Vencore 287013 and 292014 - doesn't work here too... Looks like it is IP-banned (like Cloudflare can IP ban specific sites). Like I said - we cannot do anything I guess. Please use any VPN and let's hope it'll get fixed sooner or later. Gate bypass works so I can say - it is... legal now. ***VENCORE HAS A PROXY BUILT-IN, I'LL UPDATE THE PLUGIN TO USE THE PROXY ONCE DEVS RELEASE IT - CREATOR***
 __ __
 ### Guys... Thank you all for your support. 
@@ -42,3 +42,9 @@ NOTE: AS STATED ABOVE IT WORKS FINE YOU JUST NEED PASSWORD! HAVE FUN!!!
 
 ### To UK users: note - Vencore also has this mode.
 The DIRECT PORT OF THIS PLUGIN, this way we (free users) can just bypass gate and you bypass everything. Sorry for inconsistencies and see ya with new plugins!
+
+## UPDATE AS OF 2026 - READ IT
+So it happened. **Discord is expanding its age verification worldwide...** but there is a fix! 
+Some dataminers of Discord's verification managed to bypass the checks using just **DevTools**! 
+Sadly I cannot do anything without direct access to the system, or can I if we had Discord web client... (**you need DevTools access, use Kiwi Browser or Termux**). Yes, really just DevTools and you're done!
+So be quick and check the *special* site to find out if the thing works. Anyway, install LoA-Tools on Termux for quicker verification :)
