@@ -85,6 +85,22 @@ function SettingsPage({ onBack }) {
     showToast(`Copied ${logs.length} log entries to clipboard`, 0);
   };
 
+  const copyCurrentToken = () => {
+    try {
+      const token = TokenManager.getToken();
+      if (token) {
+        clipboard.setString(token);
+        addLog('info', 'Current account token copied to clipboard');
+        showToast("Current token copied to clipboard", 0);
+      } else {
+        showToast("Could not find current token", 1);
+      }
+    } catch (e) {
+      addLog('error', 'Failed to copy current token', { error: e.message });
+      showToast("Error copying token", 1);
+    }
+  };
+
   const enableUnsafeFeatures = (value) => {
     if (value) {
       showConfirmationAlert({
@@ -181,7 +197,7 @@ function SettingsPage({ onBack }) {
           placeholder: "Paste exported account data here (or leave empty to use clipboard)...",
           placeholderTextColor: '#72767d',
           value: importText,
-          onChangeText: setImportText,
+          onChange_text: setImportText,
           multiline: true,
           numberOfLines: 4,
           style: {
@@ -265,8 +281,8 @@ function SettingsPage({ onBack }) {
                 placeholder: "New password",
                 placeholderTextColor: '#72767d',
                 value: newPassword,
-                onChangeText: setNewPassword,
-                secureTextEntry: true,
+                onChange_text: setNewPassword,
+                secure_text_entry: true,
                 style: {
                   backgroundColor: '#40444b',
                   color: 'white',
@@ -282,8 +298,8 @@ function SettingsPage({ onBack }) {
                 placeholder: "Confirm password",
                 placeholderTextColor: '#72767d',
                 value: confirmPassword,
-                onChangeText: setConfirmPassword,
-                secureTextEntry: true,
+                onChange_text: setConfirmPassword,
+                secure_text_entry: true,
                 style: {
                   backgroundColor: '#40444b',
                   color: 'white',
@@ -348,9 +364,9 @@ function SettingsPage({ onBack }) {
           React.createElement(ReactNative.Switch, {
             key: "toggle",
             value: storage.settings.enableUnsafeFeatures,
-            onValueChange: enableUnsafeFeatures,
-            trackColor: { false: '#72767d', true: '#f04747' },
-            thumbColor: 'white'
+            on_value_change: enableUnsafeFeatures,
+            track_color: { false: '#72767d', true: '#f04747' },
+            thumb_color: 'white'
           })
         ]),
 
@@ -358,6 +374,28 @@ function SettingsPage({ onBack }) {
           key: "unsafe-features",
           style: { marginTop: 16 }
         }, [
+          React.createElement(ReactNative.Text, {
+            key: "token-management-title",
+            style: { color: '#b9bbbe', fontSize: 14, fontWeight: 'bold', marginBottom: 8 }
+          }, "TOKEN MANAGEMENT"),
+
+          React.createElement(ReactNative.TouchableOpacity, {
+            key: "copy-current-token-btn",
+            onPress: copyCurrentToken,
+            style: {
+              backgroundColor: '#4f545c',
+              paddingVertical: 12,
+              paddingHorizontal: 16,
+              borderRadius: 8,
+              marginBottom: 16,
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#f04747'
+            }
+          }, React.createElement(ReactNative.Text, {
+            style: { color: 'white', fontSize: 16, fontWeight: 'bold' }
+          }, "🔑 Copy Current Account Token")),
+          
           React.createElement(ReactNative.Text, {
             key: "logging-title",
             style: { color: '#b9bbbe', fontSize: 14, fontWeight: 'bold', marginBottom: 8 }
@@ -408,8 +446,8 @@ function SettingsPage({ onBack }) {
             placeholder: "Paste account token here (leave empty to add current account)...",
             placeholderTextColor: '#72767d',
             value: newToken,
-            onChangeText: setNewToken,
-            secureTextEntry: true,
+            onChange_text: setNewToken,
+            secure_text_entry: true,
             style: {
               backgroundColor: '#40444b',
               color: 'white',
@@ -467,9 +505,9 @@ function SettingsPage({ onBack }) {
           React.createElement(ReactNative.Switch, {
             key: "toggle",
             value: storage.settings.enableCLI,
-            onValueChange: (v) => updateSetting("enableCLI", v),
-            trackColor: { false: '#72767d', true: '#7289da' },
-            thumbColor: 'white'
+            on_value_change: (v) => updateSetting("enableCLI", v),
+            track_color: { false: '#72767d', true: '#7289da' },
+            thumb_color: 'white'
           })
         ]),
 
@@ -502,7 +540,7 @@ function SettingsPage({ onBack }) {
           React.createElement(ReactNative.Switch, {
             key: "toggle",
             value: storage.settings.addToSidebar,
-            onValueChange: (v) => {
+            on_value_change: (v) => {
               updateSetting("addToSidebar", v);
               if (v) {
                 showToast("Sidebar enabled - restart app to see changes", 0);
@@ -510,8 +548,8 @@ function SettingsPage({ onBack }) {
                 showToast("Sidebar disabled - restart app to remove", 0);
               }
             },
-            trackColor: { false: '#72767d', true: '#7289da' },
-            thumbColor: 'white'
+            track_color: { false: '#72767d', true: '#7289da' },
+            thumb_color: 'white'
           })
         ]),
 
@@ -534,9 +572,9 @@ function SettingsPage({ onBack }) {
           React.createElement(ReactNative.Switch, {
             key: "toggle",
             value: storage.settings.confirmBeforeDelete,
-            onValueChange: (v) => updateSetting("confirmBeforeDelete", v),
-            trackColor: { false: '#72767d', true: '#7289da' },
-            thumbColor: 'white'
+            on_value_change: (v) => updateSetting("confirmBeforeDelete", v),
+            track_color: { false: '#72767d', true: '#7289da' },
+            thumb_color: 'white'
           })
         ])
       ])
@@ -755,7 +793,7 @@ export default function AccountsManager(props) {
       React.createElement(ReactNative.ScrollView, {
         key: "add-content",
         style: { flex: 1 },
-        contentContainerStyle: { padding: 16, paddingBottom: 100 }
+        content_container_style: { padding: 16, paddingBottom: 100 }
       }, [
         React.createElement(ReactNative.Text, {
           key: "instruction",
@@ -767,9 +805,9 @@ export default function AccountsManager(props) {
           placeholder: "Email address",
           placeholderTextColor: '#72767d',
           value: email,
-          onChangeText: setEmail,
-          keyboardType: "email-address",
-          autoCapitalize: "none",
+          onChange_text: setEmail,
+          keyboard_type: "email-address",
+          auto_capitalize: "none",
           style: {
             backgroundColor: '#40444b',
             color: 'white',
@@ -785,8 +823,8 @@ export default function AccountsManager(props) {
           placeholder: "Password",
           placeholderTextColor: '#72767d',
           value: password,
-          onChangeText: setPassword,
-          secureTextEntry: true,
+          onChange_text: setPassword,
+          secure_text_entry: true,
           style: {
             backgroundColor: '#40444b',
             color: 'white',
@@ -904,7 +942,7 @@ export default function AccountsManager(props) {
         : React.createElement(ReactNative.ScrollView, {
             key: "accounts-scroll",
             style: { flex: 1 },
-            contentContainerStyle: { paddingBottom: 100 }
+            content_container_style: { paddingBottom: 100 }
           }, orderedAccounts.map((account, index) => {
             const isCurrent = account.id === currentUserId;
             const isSwitching = switchingTo === account.id;
